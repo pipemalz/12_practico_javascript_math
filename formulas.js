@@ -1,4 +1,7 @@
-const p = document.querySelector('p');
+const rectangulo_div = document.querySelector('.rectangulo');
+const triangulo_div = document.querySelector('.triangulo');
+const circulo_div = document.querySelector('.circulo');
+
 // RECTANGULO/CUADRADO
 // PERIMETRO = SUMA DE TODOS LOS LADOS
 // AREA = LARGO(ALTURA) X ANCHO(BASE)
@@ -15,16 +18,11 @@ class Rectangulo{
         return this.base * this.altura;
     }
     print(){
-        p.innerText = `Cuadrado
+        rectangulo_div.innerText = `Cuadrado
         Base = ${this.base}px
         Altura = ${this.altura}px
         Perimetro = ${this.perimetro()}px
-        Area = ${this.area()}px`
-        const cuadradoPrint = document.createElement('div');
-        cuadradoPrint.style.width = this.base + 'px';
-        cuadradoPrint.style.height = this.altura + 'px';
-        cuadradoPrint.style.backgroundColor = 'red';
-        document.querySelector('body').appendChild(cuadradoPrint);
+        Area = ${this.area()}px`;
     }
 }
 
@@ -72,7 +70,7 @@ class Triangulo{
 }
 
 const triangulo = new Triangulo(6,8,5);
-document.querySelector('body').appendChild(document.createElement('p')).innerText = `Triángulo
+triangulo_div.innerText = `Triángulo
 Base = ${triangulo.base}px
 Lado 1 = ${triangulo.l1}px
 Lado 2 = ${triangulo.l2}px
@@ -95,8 +93,44 @@ class Circulo{
 }
 
 const circulo = new Circulo(20);
-document.querySelector('body').appendChild(document.createElement('p')).innerText = `Radio
+circulo_div.innerText = `Circulo 
 Radio = ${circulo.radio}px
 Diametro = ${circulo.diametro}px
 Perimetro = ${circulo.perimetro}px
 Area = ${circulo.area}px`
+
+
+class TrianguloIsoceles{
+    constructor(base, l){
+        this.base = base;
+        this.l = l;
+    }
+    altura(){
+        if(this.base == this.l){
+            console.log('No es un triangulo isoceles');
+        }else{
+           return Math.sqrt(this.l**2 - (this.base**2 / 4));
+        }
+    }
+}
+
+const trianguloIsoceles = new TrianguloIsoceles(4, 6);
+
+class TrianguloEscaleno{
+    constructor(l1,l2,l3){
+        this.l1 = l1;
+        this.l2 = l2;
+        this.l3 = l3;
+    }
+    altura(){
+       //Semiperimetro
+        const s = (this.l1 + this.l2 + this.l3)/2;
+        const a = this.l1;
+        const b = this.l2;
+        const c = this.l3;
+        return Math.floor((2 / a) * Math.sqrt(s * (s - a) * (s - b) * (s - c)));
+    }   
+}
+
+const trianguloEscaleno = new TrianguloEscaleno(16, 8, 10);
+console.log(trianguloEscaleno.altura());

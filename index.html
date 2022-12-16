@@ -8,7 +8,47 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p></p>
-    <script src="code.js"></script>
+    <header>
+        <h1>Taller práctico de Javascript: Matemáticas y Estadística Básica</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Formulas matemáticas</h2>
+            <div class="card formulas">
+                <h3 class="card__title">Calcular Perímetro y área de un rectangulo</h3>
+                <div class="card__content rectangulo">
+                </div>
+            </div>
+            <div class="card formulas">
+                <h3 class="card__title">Calcular Perímetro y área de un triangulo</h3>
+                <div class="card__content triangulo">
+                </div>
+            </div>
+            <div class="card formulas">
+                <h3 class="card__title">Calcular Perímetro y área de un circulo</h3>
+                <div class="card__content circulo">
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Porcentajes</h2>
+            <div class="card porcentajes">
+                <h3 class="card__title">Aplicar descuento a un precio</h3>
+                <label for="precio">
+                    Precio
+                    <input type="number" id="precio">
+                </label>
+                <label for="descuento">
+                    Descuento
+                    <input type="number" id="descuento">
+                </label>
+                <p id="precio_con_descuento"></p>
+                <button id="btn-calcular-descuento">Calcular Descuento</button>
+                <button id="limpiar-calculo-descuento">Limpiar</button>
+            </div>
+        </section>
+    </main>
+    <script src="formulas.js"></script>
+    <script src="porcentajes.js"></script>
 </body>
 </html>

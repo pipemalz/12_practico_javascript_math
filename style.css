@@ -1,0 +1,7 @@
+label:nth-child(2) input{
+    width: 100px;
+}
+label:nth-child(3) input{
+    width: 40px;
+}
+
