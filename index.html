@@ -40,11 +40,25 @@
                 </label>
                 <label for="descuento">
                     Descuento
-                    <input type="number" id="descuento">
+                    <input type="number" id="descuento" maxlength="100">
                 </label>
                 <p id="precio_con_descuento"></p>
                 <button id="btn-calcular-descuento">Calcular Descuento</button>
                 <button id="limpiar-calculo-descuento">Limpiar</button>
+            </div>
+            <div class="card cupones">
+                <h3 class="card__title">Aplicar descuento a un precio con cupón</h3>
+                <label for="precio2">
+                    Precio
+                    <input type="number" id="precio2">
+                </label>
+                <label for="cupon">
+                    Código del cupon
+                    <input id="cupon_descuento" type="text">
+                </label>
+                <p id="precio_con_descuento_cupon"></p>
+                <button id="btn-calcular-descuento-cupon">Aplicar descuento</button>
+                <button id="limpiar-calculo-descuento-cupon">Limpiar</button>
             </div>
         </section>
     </main>
