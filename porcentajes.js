@@ -1,13 +1,14 @@
+console.time('Timer');
 const input_precio = document.getElementById('precio');
-const input_precio2 = document.getElementById('precio2');
-const input_cupon_descuento = document.getElementById('cupon_descuento');
 const input_descuento = document.getElementById('descuento');
 const boton_calcular_descuento = document.getElementById('btn-calcular-descuento');
 const boton_calcular_descuento_cupon = document.getElementById('btn-calcular-descuento-cupon');
 const p_resultado = document.getElementById('precio_con_descuento');
-const p_resultado_cupon = document.getElementById('precio_con_descuento_cupon');
 const boton_limpiar = document.getElementById('limpiar-calculo-descuento');
 const boton_limpiar_cupon = document.getElementById('limpiar-calculo-descuento-cupon');
+const input_precio2 = document.getElementById('precio2');
+const input_cupon_descuento = document.getElementById('cupon_descuento');
+const p_resultado_cupon = document.getElementById('precio_con_descuento_cupon');
 
 boton_calcular_descuento.addEventListener('click', mostrarPrecioDescuento);
 boton_limpiar.addEventListener('click', limpiarDescuento);
@@ -36,29 +37,79 @@ function limpiarDescuento(){
 
 function mostrarPrecioDescuentoCupon(){
     const precio = input_precio2.value;
-    const cupon = input_cupon_descuento.value;
-    let descuento = 0;
-    if(precio != '' && cupon != ''){
-        if(cupon == 'BLACKFRIDAY'){
-            descuento = 60;
-            p_resultado_cupon.innerText = `Descuento del ${descuento}% aplicado! precio final: ${calcularDescuento(precio, descuento)}`;
-        }else if(cupon == 'SUMMERDAYS'){
-            descuento = 40;
-            p_resultado_cupon.innerText = `Descuento del ${descuento}% aplicado! precio final: ${calcularDescuento(precio, descuento)}`;
-        }else if(cupon == 'SPECIALDAYS'){
-            descuento = 20;
-            p_resultado_cupon.innerText = `Descuento del ${descuento}% aplicado! precio final: ${calcularDescuento(precio, descuento)}`;
+    const cuponInput = input_cupon_descuento.value;
+    let cuponValido = false;
+
+    if(precio != '' && cuponInput != ''){
+        //METODO OBJETO CLAVE:VALOR
+        // const cupones2 = {
+        //     'NEVERSTOPLEARNING' : 80,
+        //     'BLACKFRIDAY' : 60,
+        //     'SUMMERDAYS' : 40,
+        //     'SPECIALDAYS' : 20
+        // }
+        // if(cupones2[cuponInput]){
+        //     p_resultado_cupon.innerText = `Descuento del ${cupones2[cuponInput]}% aplicado! precio final: ${calcularDescuento(precio, cupones2[cuponInput])}`;
+        // }else{
+        //     p_resultado_cupon.innerText = `Código de cupón inválido!`;
+        // }
+
+        //METODOS ARRAYS
+        const cupones = [
+            {
+                'code' : 'NEVERSTOPLEARNING',
+                'discount' : 80
+            },
+            {
+                'code' : 'BLACKFRIDAY',
+                'discount' : 60
+            },
+            {   
+                'code' : 'SUMMERDAYS',
+                'discount' : 40
+            },
+            {
+                'code' : 'SPECIALDAYS',
+                'discount' : 20
+            }
+        ];
+   
+        // METODO FOR EACH
+
+        // cupones.forEach(cupon => {
+        //     if(cupon.code == cuponInput){
+        //         p_resultado_cupon.innerText = `Descuento del ${cupon.discount}% aplicado! precio final: ${calcularDescuento(precio, cupon.discount)}`;
+        //         cuponValido = true;
+        //     }
+        // })
+        // if(cuponValido == false){
+        //     p_resultado_cupon.innerText = 'Código de cupón inválido!';
+        // }
+
+        //METODO FILTER
+        // let cuponDescuento = cupones.filter(cupon => cupon.code == cuponInput);
+        // if(cuponDescuento[0] != undefined){
+        //     p_resultado_cupon.innerText = `Descuento del ${cuponDescuento[0].discount}% aplicado! precio final: ${calcularDescuento(precio, cuponDescuento[0].discount)}`;
+        // }else{
+        //     p_resultado_cupon.innerText = `Código de cupón inválido!`;
+        // }
+
+        // METODO FIND
+        let cuponDescuento = cupones.find(cupon => cupon.code == cuponInput);
+        if(cuponDescuento != undefined){
+            p_resultado_cupon.innerText = `Descuento del ${cuponDescuento.discount}% aplicado! precio final: ${calcularDescuento(precio, cuponDescuento.discount)}`;
         }else{
-            p_resultado_cupon.innerText = `Codigo de cupon inválido!`;
-        };
+            p_resultado_cupon.innerText = `Código de cupón inválido!`;
+        }
+
     }else{
         p_resultado_cupon.innerText = 'Por favor llene los campos';
     };
 }
-
 
 function limpiarDescuentoCupon(){
     input_precio2.value = '';
     input_cupon_descuento.value = '';
     p_resultado_cupon.innerText = '';
 }
+console.timeEnd('Timer');
