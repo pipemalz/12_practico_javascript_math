@@ -12,7 +12,7 @@
         <h1>Taller práctico de Javascript: Matemáticas y Estadística Básica</h1>
     </header>
     <main>
-        <section>
+        <section style="display: none;">
             <h2>Formulas matemáticas</h2>
             <div class="card formulas">
                 <h3 class="card__title">Calcular Perímetro y área de un rectangulo</h3>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </section>
-        <section>
+        <section style="display: none;">
             <h2>Porcentajes</h2>
             <div class="card porcentajes">
                 <h3 class="card__title">Aplicar descuento a un precio</h3>
@@ -61,8 +61,29 @@
                 <button id="limpiar-calculo-descuento-cupon">Limpiar</button>
             </div>
         </section>
+        <section>
+            <h2>Estádistica Básica</h2>
+            <div class="card promedios">
+                <h3 class="card__title">Media aritmética o promedio</h3>
+                <button id="mdn-add-input">+</button>
+                <button id="mdn-del-input">-</button>
+                <button id="calcular-mediana">Calcular</button>
+                <p id="total_valores_mdn"></p>
+                <p id="cantidad_valores_mdn"></p>
+                <p id="valor_mediana"></p>
+                <label for="mdn-nm1">
+                    Valor 1
+                    <input type="number" id="mdn-nm1">
+                </label>
+                <label for="mdn-nm2">
+                    Valor 2
+                    <input type="number" id="mdn-nm2">
+                </label>
+            </div>
+        </section>
     </main>
     <script src="formulas.js"></script>
     <script src="porcentajes.js"></script>
+    <script src="estadistica.js"></script>
 </body>
 </html>
