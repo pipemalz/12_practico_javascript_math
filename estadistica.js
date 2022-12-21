@@ -66,54 +66,49 @@ function del_mdn_input(){
 
 function calcular(){
     const valores = inputs_mediana.map(input => parseInt(input.value));
-    if(funcion_activa){
+    const total_valores = valores.reduce((acc,sum) => acc + sum);
+    let resultado = '';
+    p_cantidad_valores.innerText = '';
+    p_valor_mediana.innerText = '';
+    if(funcion_activa && verificarValores()){
         if(funcion_activa == 'btn-mediana'){
-            calcular_mediana(valores);
+            resultado = `Resultado de la mediana: ${calcular_mediana(valores)}`;
         }else if(funcion_activa == 'btn-promedio'){
-            calcular_promedio(valores);
+            resultado = `Resultado del promedio: ${calcular_promedio(valores)}`;
         }else if(funcion_activa == 'btn-moda'){
-            calcular_moda(valores);
+            resultado = `Resultado de la moda: ${calcular_moda(valores)}`;
         }
+        p_total_valores.innerText = `Suma de los valores: ${total_valores}`;
+        p_cantidad_valores.innerText = `Cantidad de valores: ${inputs_mediana.length}`;
+        p_valor_mediana.innerText = resultado;
+    }else if(funcion_activa && !verificarValores()){
+        p_total_valores.innerText = 'Por favor ingrese el valor de todos los campos';
+    }else if(!funcion_activa && verificarValores()){
+        p_total_valores.innerText = 'Por favor seleccione una funcion';
+    }else{
+        p_total_valores.innerText = 'Por favor seleccione una funcion e ingrese el valor de todos los campos';
     }
 }
 
 function calcular_mediana(valores){
-    const total_valores = valores.reduce((acc,sum) => acc + sum);  
     let mediana = null;
     if(valores.length % 2 != 0){
         mediana = valores[(valores.length-1)/2];
     }else if(valores.length % 2 == 0){
         const n1 = valores[valores.length / 2];
         const n2 = valores[(valores.length / 2)-1];
-        console.log(valores,n1, n2);
         mediana = (n1+n2)/2;
     }
-    if(verificarValores()){
-        p_total_valores.innerText = `Suma de los valores: ${total_valores}`;
-        p_cantidad_valores.innerText = `Cantidad de valores: ${inputs_mediana.length}`;
-        p_valor_mediana.innerText =`Valor de la mediana: ${mediana}`;
-    }else{
-        p_total_valores.innerText = 'Por favor ingrese el valor de todos los campos';
-        p_cantidad_valores.innerText = '';
-        p_valor_mediana.innerText = '';
-    }
+    return mediana;
 }
 
 function calcular_promedio(valores){
-    const total_valores = valores.reduce((acc,sum) => acc + sum);   
-    if(verificarValores()){
-        p_total_valores.innerText = `Suma de los valores: ${total_valores}`;
-        p_cantidad_valores.innerText = `Cantidad de valores: ${inputs_mediana.length}`;
-        p_valor_mediana.innerText =`Valor del promedio: ${total_valores/inputs_mediana.length}`;
-    }else{
-        p_total_valores.innerText = 'Por favor ingrese el valor de todos los campos';
-        p_cantidad_valores.innerText = '';
-        p_valor_mediana.innerText = '';
-    }
+    const total_valores = valores.reduce((acc,sum) => acc + sum);
+    const promedio = total_valores/valores.length;
+    return promedio;
 }
 
 function calcular_moda(valores){
-    const total_valores = valores.reduce((acc,sum) => acc + sum);
     const count = {};
     valores.forEach(valor => {
         if(count[valor] == undefined){
@@ -125,18 +120,8 @@ function calcular_moda(valores){
     });
     const mayor = Math.max(...Object.values(count));
     const numeros_repetidos = [...Object.keys(count)];
-    const moda = numeros_repetidos.find(numero => count[numero] == mayor);
-    console.log(mayor, moda);
-
-    if(verificarValores()){
-        p_total_valores.innerText = `Suma de los valores: ${total_valores}`;
-        p_cantidad_valores.innerText = `Cantidad de valores: ${inputs_mediana.length}`;
-        p_valor_mediana.innerText =`Valor de la moda: ${moda}`;
-    }else{
-        p_total_valores.innerText = 'Por favor ingrese el valor de todos los campos';
-        p_cantidad_valores.innerText = '';
-        p_valor_mediana.innerText = '';
-    }
+    const moda = numeros_repetidos.filter(numero => count[numero] == mayor);
+    return moda;
 }
 
 function verificarValores(){
