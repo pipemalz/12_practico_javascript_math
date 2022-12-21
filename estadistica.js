@@ -92,12 +92,13 @@ function calcular(){
 
 function calcular_mediana(valores){
     let mediana = null;
+    valores = valores.sort((a,b) => a - b);
     if(valores.length % 2 != 0){
         mediana = valores[(valores.length-1)/2];
     }else if(valores.length % 2 == 0){
-        const n1 = valores[valores.length / 2];
+        const n1 = valores[valores.length / 2]; 
         const n2 = valores[(valores.length / 2)-1];
-        mediana = (n1+n2)/2;
+        mediana = calcular_promedio([n1,n2]);
     }
     return mediana;
 }
