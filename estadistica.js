@@ -74,13 +74,13 @@ function calcular(){
     p_valor_mediana.innerText = '';
     if(funcion_activa && verificarValores()){
         if(funcion_activa == 'btn-mediana'){
-            resultado = `Resultado de la mediana: ${calcular_mediana(valores)}`;
+            resultado = `Resultado de la mediana: ${PlatziMath.calcular_mediana(valores)}`;
         }else if(funcion_activa == 'btn-promedio'){
-            resultado = `Resultado del promedio: ${calcular_promedio(valores)}`;
+            resultado = `Resultado del promedio: ${PlatziMath.calcular_promedio(valores)}`;
         }else if(funcion_activa == 'btn-moda'){
-            resultado = `Resultado de la moda: ${calcular_moda(valores)}`;
+            resultado = `Resultado de la moda: ${PlatziMath.calcular_moda(valores)}`;
         }else if(funcion_activa == 'btn-promedio-armonico'){
-            resultado = `Resultado del promedio armonico: ${calcular_promedio_armonico(valores)}`;
+            resultado = `Resultado del promedio armonico: ${PlatziMath.calcular_promedio_armonico(valores)}`;
         }
         p_total_valores.innerText = `Suma de los valores: ${total_valores}`;
         p_cantidad_valores.innerText = `Cantidad de valores: ${inputs_mediana.length}`;
@@ -92,61 +92,6 @@ function calcular(){
     }else{
         p_total_valores.innerText = 'Por favor seleccione una funcion e ingrese el valor de todos los campos';
     }
-}
-
-function calcular_mediana(valores){
-    let mediana = null;
-    valores = valores.sort((a,b) => a - b);
-    if(valores.length % 2 != 0){
-        mediana = valores[(valores.length-1)/2];
-    }else if(valores.length % 2 == 0){
-        const n1 = valores[valores.length / 2]; 
-        const n2 = valores[(valores.length / 2)-1];
-        mediana = calcular_promedio([n1,n2]);
-    }
-    return mediana;
-}
-
-function calcular_promedio(valores){
-    const total_valores = valores.reduce((acc,sum) => acc + sum);
-    const promedio = total_valores/valores.length;
-    return promedio;
-}
-
-function calcular_moda(valores){
-    const count = {};
-    valores.forEach(valor => {
-        if(count[valor] == undefined){
-            count[valor] = 1;
-        }else{
-            count[valor] += 1;
-        }
-        //OTRO METODO
-        //count[valor] = (count[valor] || 0) +1;
-    });
-
-    //METODO con Object.values y Object.keys
-    // const mayor = Math.max(...Object.values(count));
-    // const numeros_repetidos = [...Object.keys(count)];
-    // console.log(ordenado);
-    // const moda = numeros_repetidos.filter(numero => count[numero] == mayor);
-
-    //METODO con Object.entries
-    const conteo = Object.entries(count);
-    const conteo_ordenado = conteo.sort((prev, next) => prev[1] + next[1]);
-    moda = conteo_ordenado[0][0];
-    console.log(conteo_ordenado);
-    return moda;
-}
-
-function calcular_promedio_armonico(valores){
-    const n = valores.length;
-    let suma_inversos = 0;
-
-    for (let i = 0; i < valores.length; i++) {
-        suma_inversos += 1/valores[i];
-    }
-    return n / suma_inversos;
 }
 
 function verificarValores(){
