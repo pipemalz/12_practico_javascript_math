@@ -1,6 +1,7 @@
 const btn_mediana = document.getElementById('btn-mediana');
 const btn_promedio = document.getElementById('btn-promedio');
 const btn_moda = document.getElementById('btn-moda');
+const btn_promedio_armonico = document.getElementById('btn-promedio-armonico');
 const btn_mdn_add_input = document.getElementById('mdn-add-input');
 const btn_mdn_del_input = document.getElementById('mdn-del-input');
 const btn_calcular = document.getElementById('btn-calcular');
@@ -8,7 +9,7 @@ const btn_calcular = document.getElementById('btn-calcular');
 const input_mediana_n1 = document.getElementById('mdn-nm1');
 const input_mediana_n2 = document.getElementById('mdn-nm2');
 const inputs_mediana = [input_mediana_n1, input_mediana_n2];
-const inputs_container = document.querySelector('.card.promedios');
+const inputs_container = document.querySelector('#inputs-container');
 
 const p_total_valores = document.getElementById('total_valores_mdn');
 const p_cantidad_valores = document.getElementById('cantidad_valores_mdn');
@@ -21,10 +22,11 @@ btn_mdn_del_input.addEventListener('click', del_mdn_input);
 btn_mediana.addEventListener('click', activar_funcion);
 btn_moda.addEventListener('click', activar_funcion);
 btn_promedio.addEventListener('click', activar_funcion);
+btn_promedio_armonico.addEventListener('click', activar_funcion);
 btn_calcular.addEventListener('click', calcular);
 
 function activar_funcion(e){
-    const botones = [btn_mediana, btn_moda, btn_promedio];
+    const botones = [btn_mediana, btn_moda, btn_promedio, btn_promedio_armonico];
     botones.forEach(boton => {
         if(e.target == boton){
             funcion_activa = e.target.id;
@@ -38,7 +40,7 @@ function activar_funcion(e){
 }
 
 function add_mdn_input(){
-    if(inputs_mediana.length < 10){
+    if(inputs_mediana.length < 20){
         const id = inputs_mediana.length+1;
 
         const label = document.createElement('label');
@@ -77,6 +79,8 @@ function calcular(){
             resultado = `Resultado del promedio: ${calcular_promedio(valores)}`;
         }else if(funcion_activa == 'btn-moda'){
             resultado = `Resultado de la moda: ${calcular_moda(valores)}`;
+        }else if(funcion_activa == 'btn-promedio-armonico'){
+            resultado = `Resultado del promedio armonico: ${calcular_promedio_armonico(valores)}`;
         }
         p_total_valores.innerText = `Suma de los valores: ${total_valores}`;
         p_cantidad_valores.innerText = `Cantidad de valores: ${inputs_mediana.length}`;
@@ -117,12 +121,32 @@ function calcular_moda(valores){
         }else{
             count[valor] += 1;
         }
-        // count[valor] = (count[valor] || 0) +1;
+        //OTRO METODO
+        //count[valor] = (count[valor] || 0) +1;
     });
-    const mayor = Math.max(...Object.values(count));
-    const numeros_repetidos = [...Object.keys(count)];
-    const moda = numeros_repetidos.filter(numero => count[numero] == mayor);
+
+    //METODO con Object.values y Object.keys
+    // const mayor = Math.max(...Object.values(count));
+    // const numeros_repetidos = [...Object.keys(count)];
+    // console.log(ordenado);
+    // const moda = numeros_repetidos.filter(numero => count[numero] == mayor);
+
+    //METODO con Object.entries
+    const conteo = Object.entries(count);
+    const conteo_ordenado = conteo.sort((prev, next) => prev[1] + next[1]);
+    moda = conteo_ordenado[0][0];
+    console.log(conteo_ordenado);
     return moda;
+}
+
+function calcular_promedio_armonico(valores){
+    const n = valores.length;
+    let suma_inversos = 0;
+
+    for (let i = 0; i < valores.length; i++) {
+        suma_inversos += 1/valores[i];
+    }
+    return n / suma_inversos;
 }
 
 function verificarValores(){

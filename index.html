@@ -67,8 +67,9 @@
                 <h3 class="card__title">Mediana / Promedio / Moda</h3>
                 <div class="buttons_container">
                     <button id="btn-mediana">Mediana</button>
-                    <button id="btn-promedio">Promedio</button>
+                    <button id="btn-promedio">Promedio Aritmetico</button>
                     <button id="btn-moda">Moda</button>
+                    <button id="btn-promedio-armonico">Promedio armonico</button>
                 </div>
                 <button id="mdn-add-input">+</button>
                 <button id="mdn-del-input">-</button>
@@ -76,19 +77,22 @@
                 <p id="total_valores_mdn"></p>
                 <p id="cantidad_valores_mdn"></p>
                 <p id="valor_mediana"></p>
-                <label for="mdn-nm1">
-                    Valor 1
-                    <input type="number" id="mdn-nm1">
-                </label>
-                <label for="mdn-nm2">
-                    Valor 2
-                    <input type="number" id="mdn-nm2">
-                </label>
+                <div id="inputs-container">
+                    <label for="mdn-nm1">
+                        Valor 1
+                        <input type="number" id="mdn-nm1">
+                    </label>
+                    <label for="mdn-nm2">
+                        Valor 2
+                        <input type="number" id="mdn-nm2">
+                    </label>
+                </div>
             </div>
         </section>
     </main>
     <script src="formulas.js"></script>
     <script src="porcentajes.js"></script>
     <script src="estadistica.js"></script>
+    <script src="test.js"></script>
 </body>
 </html>
