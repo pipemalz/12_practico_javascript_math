@@ -36,32 +36,48 @@ console.log(proyectarSalarios('Juanita', salarios));
 
 //Encontrar a todas las personas que en cada año hayan trabajado en la empresa que necesitemos
 
-function estructurarEmpresas(arraySalarios){
-    const trabajos_globales = [];
-    arraySalarios.forEach(salario => {
-        trabajos_globales.push(...salario.trabajos);
-    });
-    const empresas = {};
-    for (let i = 0; i < trabajos_globales.length; i++) {
-        empresas[trabajos_globales[i].empresa] = {};
-    }
+// function estructurarEmpresas(arraySalarios){
+//     const trabajos_globales = [];
+//     arraySalarios.forEach(salario => {
+//         trabajos_globales.push(...salario.trabajos);
+//     });
+//     const empresas = {};
+//     for (let i = 0; i < trabajos_globales.length; i++) {
+//         empresas[trabajos_globales[i].empresa] = {};
+//     }
 
-    for (const empresa in empresas) {
-        for (let i = 0; i < trabajos_globales.length; i++) {
-            if(trabajos_globales[i].empresa == empresa){
-                empresas[empresa][trabajos_globales[i].year] = [];
+//     for (const empresa in empresas) {
+//         for (let i = 0; i < trabajos_globales.length; i++) {
+//             if(trabajos_globales[i].empresa == empresa){
+//                 empresas[empresa][trabajos_globales[i].year] = [];
+//             }
+//         }
+//         for (let i = 0; i < trabajos_globales.length; i++) {
+//             if(trabajos_globales[i].empresa == empresa){
+//                 empresas[empresa][trabajos_globales[i].year].push(trabajos_globales[i].salario);
+//             }
+//         }
+//     }
+//     return empresas;
+// }
+const empresas = estructurarEmpresas(salarios);
+function estructurarEmpresas(arraySalarios){
+    const empresas = {};
+    for(const salario of arraySalarios){
+        for(const trabajo of salario.trabajos){
+            if(!empresas[trabajo.empresa]){
+                empresas[trabajo.empresa] = {};
             }
-        }
-        for (let i = 0; i < trabajos_globales.length; i++) {
-            if(trabajos_globales[i].empresa == empresa){
-                empresas[empresa][trabajos_globales[i].year].push(trabajos_globales[i].salario);
+            if(!empresas[trabajo.empresa][trabajo.year]){
+                empresas[trabajo.empresa][trabajo.year] = [];
             }
+            empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
         }
     }
     return empresas;
 }
 
-console.log(estructurarEmpresas(salarios));
+
 
 /* const empresas {
     Industrias Mokepon : {
