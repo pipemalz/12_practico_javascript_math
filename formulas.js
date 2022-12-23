@@ -133,4 +133,3 @@ class TrianguloEscaleno{
 }
 
 const trianguloEscaleno = new TrianguloEscaleno(16, 8, 10);
-console.log(trianguloEscaleno.altura());

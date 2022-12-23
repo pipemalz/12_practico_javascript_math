@@ -1,4 +1,3 @@
-console.time('Timer');
 const input_precio = document.getElementById('precio');
 const input_descuento = document.getElementById('descuento');
 const boton_calcular_descuento = document.getElementById('btn-calcular-descuento');
@@ -112,4 +111,3 @@ function limpiarDescuentoCupon(){
     input_cupon_descuento.value = '';
     p_resultado_cupon.innerText = '';
 }
-console.timeEnd('Timer');

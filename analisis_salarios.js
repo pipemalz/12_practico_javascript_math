@@ -31,9 +31,6 @@ function proyectarSalarios(nombre, arraySalarios){
 //     return {aumento: promedio_aumento, nuevo_salario: nuevo_salario};
 // }
 
-
-console.log(proyectarSalarios('Juanita', salarios));
-
 //Encontrar a todas las personas que en cada año hayan trabajado en la empresa que necesitemos
 
 // function estructurarEmpresas(arraySalarios){
@@ -72,11 +69,50 @@ function estructurarEmpresas(arraySalarios){
                 empresas[trabajo.empresa][trabajo.year] = [];
             }
             empresas[trabajo.empresa][trabajo.year].push(trabajo.salario);
-        }
+        } 
     }
     return empresas;
 }
 
+function medianaSalarioEmpresas(empresa, year){
+    if(!empresas[empresa]){
+       console.warn('No existe información de la empresa referenciada');
+    }else if(!empresas[empresa][year]){
+        console.warn('La empresa referenciada no dio salarios en ese año');
+    }else{
+        return PlatziMath.calcular_mediana(empresas[empresa][year]);
+    }
+}
+
+function proyeccionSalarioEmpresas(empresa, option=0){
+    if(!empresas[empresa]){
+        console.warn('No existe información de la empresa referenciada');
+    }else if(empresas[empresa] && option == 0){
+        const mediana_salarios = [];
+        const aumentos = [];
+        for (const year in empresas[empresa]) {
+            mediana_salarios.push(PlatziMath.calcular_mediana(empresas[empresa][year]));
+        };
+        for (let i = 1; i < mediana_salarios.length; i++) {
+            aumentos.push(mediana_salarios[i] - mediana_salarios[i-1]);
+        };
+        const mediana_aumentos = PlatziMath.calcular_mediana(aumentos);
+        const proyeccion = mediana_salarios[mediana_salarios.length - 1] + mediana_aumentos;
+        return proyeccion;
+    }else if(empresas[empresa] && option == 1){
+        const lowest_salarios = [];
+        const highest_salarios = [];
+        for (const year in empresas[empresa]) {
+            const salarios_ordenados = empresas[empresa][year].sort((a,b) => a - b);
+            lowest_salarios.push(salarios_ordenados[0]);
+            highest_salarios.push(salarios_ordenados[salarios_ordenados.length -1]);
+        };
+        return {
+            lower: PlatziMath.calcular_mediana(lowest_salarios),
+            higher: PlatziMath.calcular_mediana(highest_salarios)
+        }
+    }
+}
 
 
 /* const empresas {
