@@ -1,6 +1,24 @@
-const rectangulo_div = document.querySelector('.rectangulo');
-const triangulo_div = document.querySelector('.triangulo');
-const circulo_div = document.querySelector('.circulo');
+const rectangulo_div = document.querySelector('.card__resultados--rectangulo');
+const triangulo_div = document.querySelector('.card__resultados--triangulo');
+const circulo_div = document.querySelector('.card__resultados--circulo');
+const buttons = {
+    rectangulo: document.querySelector('.button--rectangulo'),
+    triangulo: document.querySelector('.button--triangulo'),
+    circulo: document.querySelector('.button--circulo')
+};
+
+const inputs = {
+    rectangulo : {
+        base: document.getElementById('input_base_rectangulo'),
+        altura: document.getElementById('input_altura_rectangulo')
+    },
+    triangulo : {},
+    circulo : {}
+}
+
+for (const button in buttons) {
+    buttons[button].addEventListener('click', imprimirDatos);
+}
 
 // RECTANGULO/CUADRADO
 // PERIMETRO = SUMA DE TODOS LOS LADOS
@@ -18,16 +36,25 @@ class Rectangulo{
         return this.base * this.altura;
     }
     print(){
-        rectangulo_div.innerText = `Cuadrado
-        Base = ${this.base}px
-        Altura = ${this.altura}px
-        Perimetro = ${this.perimetro()}px
-        Area = ${this.area()}px`;
+        rectangulo_div.innerHTML = `<h3> Cuadrado </h3>
+        <p> <strong> Base </strong> = ${this.base}px </p>
+        <p> <strong> Altura </strong> = ${this.altura}px </p>
+        <p> <strong> Perimetro </strong> = ${this.perimetro()}px </p>
+        <p> <strong> Area </strong> = ${this.area()}px </p>`;
     }
 }
 
-const cuadrado = new Rectangulo(100, 100);
-cuadrado.print();
+function imprimirDatos(e){
+    const button = e.target.classList[1];
+    if(button == 'button--rectangulo'){
+        const base = inputs['rectangulo']['base'].value;
+        const altura = inputs['rectangulo']['altura'].value;
+        if(base != '' && altura != ''){
+            const rectangulo = new Rectangulo(base, altura);
+            rectangulo.print();
+        }
+    }
+}
 
 // TRIANGULO
 // PERIMETRO = SUMA DE TODOS LOS LADOS
