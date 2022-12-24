@@ -113,10 +113,10 @@ function medianaSalarioEmpresas(empresa, year){
 //     }
 // }
 
-function proyeccionSalarioEmpresas(empresa){
+function proyeccionSalarioEmpresas(empresa, option=0){
     if(!empresas[empresa]){
         console.warn('No existe información de la empresa referenciada');
-    }else if(empresas[empresa]){
+    }else if(empresas[empresa] && option == 0){
         const empresaYears = Object.keys(empresas[empresa]);
         // const promedios = [];
         // empresaYears.forEach(year => {
@@ -124,7 +124,33 @@ function proyeccionSalarioEmpresas(empresa){
         // });
         const promedios = empresaYears.map(year => medianaSalarioEmpresas(empresa, year));
         return proyectarSalarios(promedios);
+    }else if(empresas[empresa] && option == 1){
+        const lowest_salarios = [];
+        const highest_salarios = [];
+        for (const year in empresas[empresa]) {
+            const salarios_ordenados = empresas[empresa][year].sort((a,b) => a - b);
+            lowest_salarios.push(salarios_ordenados[0]);
+            highest_salarios.push(salarios_ordenados[salarios_ordenados.length -1]);
+        };
+        return {
+            'Salario mas bajo': PlatziMath.calcular_mediana(lowest_salarios),
+            'Salario mas alto': PlatziMath.calcular_mediana(highest_salarios)
         }
+    }
+}
+function top10Salarios(salarios){
+    // const personas = salarios.map(salario => salario.name);
+    const salarios_globales = salarios.map(salario => {
+        return PlatziMath.calcular_mediana(getSalarios(salario.name, salarios));
+    });
+    salarios_globales.sort((a,b) => a-b);
+    const cantidad_top10 = ~~(salarios_globales.length * 0.10);
+    const top10 = salarios_globales.slice(
+        salarios_globales.length - cantidad_top10,
+        salarios_globales.length
+    );
+    const medianaTop10 = PlatziMath.calcular_mediana(top10);
+    return medianaTop10;
 }
 
 /* const empresas {
