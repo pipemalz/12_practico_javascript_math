@@ -1,3 +1,4 @@
+const root = document.querySelector(':root');
 const html_body = document.querySelector('.body');
 const html_header = document.querySelector('.header');
 const secciones = {
@@ -36,3 +37,22 @@ function visibilidadSection(e){
     }
 }
 
+const themes = {
+    light : {
+        '--background-color' : '#3EECAC',
+        '--background-gradient' : 'linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)'
+    },
+    dark : {
+        '--background-color' : '#434343',
+        '--background-gradient' : 'background-image: linear-gradient(to right, #434343 0%, black 100%);'
+    }
+}
+
+function setTheme(theme){
+    for (const property in themes[theme]) {
+        root.style.setProperty(property, themes[theme][property]);
+        console.log(property)
+    }
+}
+
+setTheme('dark')

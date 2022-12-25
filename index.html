@@ -26,57 +26,39 @@
                 <h3 class="card__title">Calcular Perímetro y área de un rectangulo</h3>
                 <div class="card__content card__content--rectangulo">
                     <div class="card__form">
-                        <label class="label" for="input_base_rectangulo">
-                            <p class="label__title">Base</p>
-                            <input class="label__input" type="number" name="input_base_rectangulo" id="input_base_rectangulo">
-                        </label>
-                        <label class="label" for="input_altura_rectangulo">
-                        <p class="label__title">Altura</p>
-                            <input class="label__input" type="number" name="input_altura_rectangulo" id="input_altura_rectangulo">
-                        </label>
+                            <input class="input" type="number" placeholder="Base" id="input_base_rectangulo">
+                            <input class="input" type="number" placeholder="Altura" id="input_altura_rectangulo">
                         <button class="button button--rectangulo">Calcular</button>
                         <div class="card__resultados card__resultados--rectangulo"></div>
                     </div>
                 </div>
             </div>
-            <div class="card formulas">
+            <div class="card card--formulas">
                 <h3 class="card__title">Calcular Perímetro y área de un triangulo</h3>
                 <div class="card__content card__content--triangulo">
                     <div class="card__form">
-                        <label class="label" for="input_base_triangulo">
-                            <p class="label__title">Base</p>
-                            <input class="label__input" type="number" name="input_base_triangulo" id="input_base_triangulo">
-                        </label>
-                        <label class="label" for="input_lado1_triangulo">
-                            <p class="label__title">Lado 1</p>
-                            <input class="label__input" type="number" name="input_lado1_triangulo" id="input_lado1_triangulo">
-                        </label>
-                        <label class="label" for="input_lado2_triangulo">
-                            <p class="label__title">Lado 2</p>
-                            <input class="label__input" type="number" name="input_lado2_triangulo" id="input_lado2_triangulo">
-                        </label>
+                            <input class="input" type="number" placeholder="Base" id="input_base_triangulo">
+                            <input class="input" type="number" placeholder="Lado 1" id="input_lado1_triangulo">
+                            <input class="input" type="number" placeholder="Lado 2" id="input_lado2_triangulo">
                         <button class="button button--triangulo">Calcular</button>
                     </div>
                     <div class="card__resultados card__resultados--triangulo"></div>
                 </div>
             </div>
-            <div class="card formulas">
+            <div class="card card--formulas">
                 <h3 class="card__title">Calcular Perímetro y área de un circulo</h3>
                 <div class="card__content card__content--circulo">
                     <div class="card__form">
-                        <label class="label" for="input_radio_circulo">
-                            <p class="label__title">Base</p>
-                            <input class="label__input" type="number" name="input_radio_circulo" id="input_radio_circulo">
-                        </label>
+                            <input class="label__input" type="number" name="input_radio_circulo" id="input_radio_circulo" placeholder="Radio">
                         <button class="button button--circulo">Calcular</button>
-                        <div class="card__resultados card__resultados--circulo"></div>
                     </div>
+                    <div class="card__resultados card__resultados--circulo"></div>
                 </div>
             </div>
         </section>
         <section class="section section--porcentajes section--inactive">
             <h2 class="section__title">Porcentajes</h2>
-            <div class="card porcentajes">
+            <div class="card card--porcentajes">
                 <h3 class="card__title">Aplicar descuento a un precio</h3>
                 <label for="precio">
                     Precio
@@ -107,7 +89,7 @@
         </section>
         <section class="section section--estadistica section--inactive">
             <h2 class="section__title">Estádistica Básica</h2>
-            <div class="card promedios">
+            <div class="card card--promedios">
                 <h3 class="card__title">Mediana / Promedio / Moda</h3>
                 <div class="buttons_container">
                     <button id="btn-mediana">Mediana</button>
@@ -130,6 +112,21 @@
                         Valor 2
                         <input type="number" id="mdn-nm2">
                     </label>
+                </div>
+            </div>
+        </section>
+        <section class="section section--salarios section--active">
+            <h2 class="section__title">Análisis salarial</h2>
+            <div class="card card--salarios">
+                <h3 class="card__title">Salario por persona</h3>
+                <div class="card__content card__content--salarios">
+                    <div class="card__form">
+                        <input list="select-persona" id="input-persona"/>
+                        <datalist id="select-persona">
+                        </datalist>
+                    </div>
+                    <button class="button button--salario-persona">Analisis de salario</button>
+                    <div class="card__resultados card__resultados--persona"></div>
                 </div>
             </div>
         </section>

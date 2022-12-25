@@ -6,7 +6,6 @@ const buttons = {
     triangulo: document.querySelector('.button--triangulo'),
     circulo: document.querySelector('.button--circulo')
 };
-
 const inputs = {
     rectangulo : {
         base: document.getElementById('input_base_rectangulo'),

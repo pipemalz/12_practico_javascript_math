@@ -1,25 +1,73 @@
-function getSalarios(nombre, arraySalarios){
-    const persona = arraySalarios.find(salario => salario.name == nombre);
-    const salarios_persona = persona.trabajos.map(trabajo => trabajo.salario);
-    return salarios_persona;
+const datalist_persona = document.getElementById('select-persona');
+const input_persona = document.getElementById('input-persona');
+const salario_persona_div = document.querySelector('.card__resultados--persona');
+const buttons_salario = {
+    salario_persona : document.querySelector('.button--salario-persona')
 };
 
-function proyectarSalarios(salarios){
-    const porcentajes_aumentos = [];
-    for (const index in salarios) {
-       if(index < (salarios.length-1)){
-            const salarioActual = salarios[parseInt(index) + 1];
-            const salarioAnterior = salarios[index];
-            const aumento = ((salarioActual * 100) / salarioAnterior) - 100;
-            porcentajes_aumentos.push(aumento);
-       }
-    }
-    const proyeccion_porcentaje = PlatziMath.calcular_mediana(porcentajes_aumentos);
-    const ultimo_salario = salarios[salarios.length -1];
-    const aumento = (ultimo_salario*proyeccion_porcentaje)/100;
-    const nuevo_salario = ultimo_salario + aumento;
-    return nuevo_salario;
+for (const button in buttons_salario) {
+    buttons_salario[button].addEventListener('click', imprimirSalarioPersona);
 }
+
+salarios.forEach(salario => {
+    const option = document.createElement('option');
+    option.setAttribute('value', salario.name);
+    datalist_persona.appendChild(option);
+});
+
+class Persona{
+    constructor(nombre){
+        this.nombre = nombre;
+        this.salarios = this.getSalarios();
+        this.proyeccion_salario = this.proyectarSalarios();
+        this.trabajos = this.getTrabajos();
+    };
+    getSalarios(){
+        const persona = salarios.find(salario => salario.name == this.nombre);
+        const salarios_persona = persona.trabajos.map(trabajo => trabajo.salario);
+        return salarios_persona;
+    };
+    getTrabajos(){
+        const persona = salarios.find(salario => salario.name == this.nombre);
+        return persona.trabajos;
+    };
+    proyectarSalarios(){
+        const porcentajes_aumentos = [];
+        for (const index in this.salarios) {
+           if(index < (this.salarios.length-1)){
+                const salarioActual = this.salarios[parseInt(index) + 1];
+                const salarioAnterior = this.salarios[index];
+                const aumento = ((salarioActual * 100) / salarioAnterior) - 100;
+                porcentajes_aumentos.push(aumento);
+           }
+        }
+        const proyeccion_porcentaje = PlatziMath.calcular_mediana(porcentajes_aumentos);
+        const ultimo_salario = this.salarios[this.salarios.length -1];
+        const aumento = (ultimo_salario*proyeccion_porcentaje)/100;
+        const nuevo_salario = ultimo_salario + aumento;
+        return nuevo_salario;
+    };
+    printTrabajos(){
+        let texto = '';
+        this.trabajos.forEach(trabajo => {
+            texto += `<p><strong>Año: </strong>${trabajo.year}, <strong>Empresa: </strong>${trabajo.empresa}, <strong>Salario: </strong> ${trabajo.salario}</p>`
+        });
+        return texto;
+    }
+    print(){
+        salario_persona_div.innerHTML = `<h4> Análisis salarial de ${this.nombre} </h4>
+        <p><strong>Proyeccion salario: </strong>${this.proyectarSalarios()}</p>
+        ${this.printTrabajos()}`;
+    }
+};
+
+function imprimirSalarioPersona(){
+    if(input_persona.value != ''){
+        const persona = new Persona(input_persona.value);
+        persona.print();
+    }
+}
+
 // function proyectarSalarios(salarios_persona){
 //     const aumentos_salario = [];
 //     salarios_persona.sort((prev,next) => {
