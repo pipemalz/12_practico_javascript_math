@@ -4,12 +4,14 @@ const html_header = document.querySelector('.header');
 const secciones = {
     mates : document.querySelector('.section--mates'),
     porcentajes : document.querySelector('.section--porcentajes'),
-    estadistica : document.querySelector('.section--estadistica')
+    estadistica : document.querySelector('.section--estadistica'),
+    salarios : document.querySelector('.section--salarios')
 };
 const menu_items = {
     mates: document.querySelector('.menu__item--mates'),
     porcentajes: document.querySelector('.menu__item--porcentajes'),
     estadistica: document.querySelector('.menu__item--estadistica'),
+    salarios: document.querySelector('.menu__item--salarios')
 };
 const menu_buttons = document.querySelectorAll('.menu__item');
 

@@ -17,6 +17,7 @@
             <h2 class="menu__item menu__item--mates menu__item--inactive">Matemáticas</h2>
             <h2 class="menu__item menu__item--porcentajes menu__item--inactive">Porcentajes</h2>
             <h2 class="menu__item menu__item--estadistica menu__item--inactive">Estadística</h2>
+            <h2 class="menu__item menu__item--salarios menu__item--inactive">Análisis salarial</h2>
         </nav>
     </header>
     <main class="main">
@@ -29,8 +30,8 @@
                             <input class="input" type="number" placeholder="Base" id="input_base_rectangulo">
                             <input class="input" type="number" placeholder="Altura" id="input_altura_rectangulo">
                         <button class="button button--rectangulo">Calcular</button>
-                        <div class="card__resultados card__resultados--rectangulo"></div>
                     </div>
+                    <div class="card__resultados card__resultados--rectangulo"></div>
                 </div>
             </div>
             <div class="card card--formulas">
@@ -49,7 +50,7 @@
                 <h3 class="card__title">Calcular Perímetro y área de un circulo</h3>
                 <div class="card__content card__content--circulo">
                     <div class="card__form">
-                            <input class="label__input" type="number" name="input_radio_circulo" id="input_radio_circulo" placeholder="Radio">
+                            <input class="input" type="number" name="input_radio_circulo" id="input_radio_circulo" placeholder="Radio">
                         <button class="button button--circulo">Calcular</button>
                     </div>
                     <div class="card__resultados card__resultados--circulo"></div>
@@ -60,17 +61,15 @@
             <h2 class="section__title">Porcentajes</h2>
             <div class="card card--porcentajes">
                 <h3 class="card__title">Aplicar descuento a un precio</h3>
-                <label for="precio">
-                    Precio
-                    <input type="number" id="precio">
-                </label>
-                <label for="descuento">
-                    Descuento
-                    <input type="number" id="descuento" maxlength="100">
-                </label>
-                <p id="precio_con_descuento"></p>
-                <button id="btn-calcular-descuento">Calcular Descuento</button>
-                <button id="limpiar-calculo-descuento">Limpiar</button>
+                <div class="card__content card__content--triangulo">
+                    <div class="card__form">
+                        <input class="input" type="number" id="precio" placeholder="Precio">
+                        <input class="input" type="number" id="descuento" maxlength="100" placeholder="Descuento">
+                        <button class="button" id="btn-calcular-descuento">Calcular Descuento</button>
+                        <button class="button" id="limpiar-calculo-descuento">Limpiar</button>
+                    </div>
+                    <p id="precio_con_descuento"></p>
+                </div>
             </div>
             <div class="card cupones">
                 <h3 class="card__title">Aplicar descuento a un precio con cupón</h3>
@@ -115,13 +114,13 @@
                 </div>
             </div>
         </section>
-        <section class="section section--salarios section--active">
+        <section class="section section--salarios section--inactive">
             <h2 class="section__title">Análisis salarial</h2>
             <div class="card card--salarios">
                 <h3 class="card__title">Salario por persona</h3>
                 <div class="card__content card__content--salarios">
                     <div class="card__form">
-                        <input list="select-persona" id="input-persona"/>
+                        <input list="select-persona" id="input-persona" placeholder="Nombre"/>
                         <datalist id="select-persona">
                         </datalist>
                     </div>

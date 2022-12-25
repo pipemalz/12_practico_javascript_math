@@ -71,9 +71,15 @@ html{
     gap: 20px;
 }
 
+/* ESTILOS CONTENEDOR MAIN */
+
+/* ESTILOS SECCIONES */
+
 .section{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    max-width: 640px;
     gap: 1.8rem;
     background-color: rgba(255, 255, 255, 0.1);
     padding: 2rem;
@@ -96,7 +102,59 @@ html{
     display: none;
 }
 
-/* ESTILOS CONTENEDOR MAIN */
+/* ESTILOS SECCIONES */
+
+/* ESTILOS CARDS */
+
+.card{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 360px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px;
+}
+.card__title{
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+}
+.card__content {
+    display: flex;
+    flex-direction: column;
+}
+.card__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.input{
+    height: 30px;
+    width: 240px;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+}
+.button{
+    height: 30px;
+    width: 240px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(0, 255, 0, 0.5);
+    font-weight: bold;
+    font-size: 1.6;
+    color: white;
+}
+
+.button:hover{
+    cursor: pointer;
+    background-color: rgba(0, 255, 0, 0.7);
+}
+
+/* ESTILOS CARDS */
+
 
 /* ESTILOS FOOTER */
 
