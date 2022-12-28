@@ -1,12 +1,16 @@
 const datalist_persona = document.getElementById('select-persona');
+const datalist_empresa = document.getElementById('select-empresa');
 const input_persona = document.getElementById('input-persona');
+const input_empresa = document.getElementById('input-empresa');
 const salario_persona_div = document.querySelector('.card__resultados--persona');
+const salario_empresa_div = document.querySelector('.card__resultados--empresa');
 const buttons_salario = {
-    salario_persona : document.querySelector('.button--salario-persona')
+    salario_persona : document.querySelector('.button--salario-persona'),
+    salario_empresa : document.querySelector('.button--salario-empresa')
 };
 
 for (const button in buttons_salario) {
-    buttons_salario[button].addEventListener('click', imprimirSalarioPersona);
+    buttons_salario[button].addEventListener('click', imprimirSalarios);
 }
 
 salarios.forEach(salario => {
@@ -19,7 +23,7 @@ class Persona{
     constructor(nombre){
         this.nombre = nombre;
         this.salarios = this.getSalarios();
-        this.proyeccion_salario = this.proyectarSalarios();
+        this.proyeccion_salario = Persona.proyectarSalarios(this.salarios);
         this.trabajos = this.getTrabajos();
     };
     getSalarios(){
@@ -31,18 +35,18 @@ class Persona{
         const persona = salarios.find(salario => salario.name == this.nombre);
         return persona.trabajos;
     };
-    proyectarSalarios(){
+    static proyectarSalarios(salarios){
         const porcentajes_aumentos = [];
-        for (const index in this.salarios) {
-           if(index < (this.salarios.length-1)){
-                const salarioActual = this.salarios[parseInt(index) + 1];
-                const salarioAnterior = this.salarios[index];
+        for (const index in salarios) {
+           if(index < (salarios.length-1)){
+                const salarioActual = salarios[parseInt(index) + 1];
+                const salarioAnterior = salarios[index];
                 const aumento = ((salarioActual * 100) / salarioAnterior) - 100;
                 porcentajes_aumentos.push(aumento);
            }
         }
         const proyeccion_porcentaje = PlatziMath.calcular_mediana(porcentajes_aumentos);
-        const ultimo_salario = this.salarios[this.salarios.length -1];
+        const ultimo_salario = salarios[salarios.length -1];
         const aumento = (ultimo_salario*proyeccion_porcentaje)/100;
         const nuevo_salario = ultimo_salario + aumento;
         return nuevo_salario;
@@ -56,16 +60,21 @@ class Persona{
     }
     print(){
         salario_persona_div.innerHTML = `<h4> Análisis salarial de ${this.nombre} </h4>
-        <p><strong>Proyeccion salario: </strong>${this.proyectarSalarios()}</p>
+        <p><strong>Proyeccion salario: </strong>${this.proyeccion_salario}</p>
         ${this.printTrabajos()}`;
     }
 };
 
-function imprimirSalarioPersona(){
-    if(input_persona.value != ''){
+function imprimirSalarios(e){
+    if(e.target.classList.contains('button--salario-persona') && input_persona.value != ''){
         const persona = new Persona(input_persona.value);
         persona.print();
+    }else if(e.target.classList.contains('button--salario-empresa') && input_empresa.value != ''){
+        console.log('aca')
+        const empresa = new Empresa(input_empresa.value);
+        empresa.print();
     }
+
 }
 
 // function proyectarSalarios(salarios_persona){
@@ -121,15 +130,66 @@ function estructurarEmpresas(arraySalarios){
     return empresas;
 }
 
-function medianaSalarioEmpresas(empresa, year){
-    if(!empresas[empresa]){
-       console.warn('No existe información de la empresa referenciada');
-    }else if(!empresas[empresa][year]){
-        console.warn('La empresa referenciada no dio salarios en ese año');
-    }else{
-        return PlatziMath.calcular_mediana(empresas[empresa][year]);
+Object.keys(empresas).forEach(empresa => {
+    const option = document.createElement('option');
+    option.setAttribute('value', empresa);
+    datalist_empresa.appendChild(option);
+});
+
+class Empresa{
+    constructor(name){
+        this.name = name;
+    };
+    medianaSalarios(year){
+        if(!empresas[this.name]){
+           console.warn('No existe información de la empresa referenciada');
+        }else if(!empresas[this.name][year]){
+            console.warn('La empresa referenciada no dio salarios en ese año');
+        }else{
+            return PlatziMath.calcular_mediana(empresas[this.name][year]);
+        }
+    };
+    proyeccionSalario(option=0){
+        if(!empresas[this.name]){
+            console.warn('No existe información de la empresa referenciada');
+        }else if(empresas[this.name] && option == 0){
+            const empresaYears = Object.keys(empresas[this.name]);
+            // const promedios = [];
+            // empresaYears.forEach(year => {
+            //     promedios.push(medianaSalarioEmpresas(empresa, year));
+            // });
+            const promedios = empresaYears.map(year => this.medianaSalarios(year));
+            return Persona.proyectarSalarios(promedios);
+        }else if(empresas[this.name] && option == 1){
+            const lowest_salarios = [];
+            const highest_salarios = [];
+            for (const year in empresas[this.name]) {
+                const salarios_ordenados = empresas[this.name][year].sort((a,b) => a - b);
+                lowest_salarios.push(salarios_ordenados[0]);
+                highest_salarios.push(salarios_ordenados[salarios_ordenados.length -1]);
+            };
+            return {
+                'Salario mas bajo': PlatziMath.calcular_mediana(lowest_salarios),
+                'Salario mas alto': PlatziMath.calcular_mediana(highest_salarios)
+            }
+        }
+    };
+    print(){
+        salario_empresa_div.innerHTML = `<p><strong>Empresa: </strong> ${this.name}</p>
+        <h4>Promedio salarios pagados por año</h4>`
+
+        Object.keys(empresas[this.name]).forEach(year => {
+            salario_empresa_div.innerHTML += `<p><strong>${year}: </strong>${this.medianaSalarios(year)}</p>`;
+        })
+
+        salario_empresa_div.innerHTML += `<p><strong>Proyeccion salarial: </strong>${this.proyeccionSalario()}</p>`
     }
+
 }
+
+const freelance = new Empresa('Freelance');
+console.log(freelance.medianaSalarios(2020))
+console.log(freelance.proyeccionSalario(1))
 
 // function proyeccionSalarioEmpresas(empresa, option=0){
 //     if(!empresas[empresa]){
@@ -161,31 +221,7 @@ function medianaSalarioEmpresas(empresa, year){
 //     }
 // }
 
-function proyeccionSalarioEmpresas(empresa, option=0){
-    if(!empresas[empresa]){
-        console.warn('No existe información de la empresa referenciada');
-    }else if(empresas[empresa] && option == 0){
-        const empresaYears = Object.keys(empresas[empresa]);
-        // const promedios = [];
-        // empresaYears.forEach(year => {
-        //     promedios.push(medianaSalarioEmpresas(empresa, year));
-        // });
-        const promedios = empresaYears.map(year => medianaSalarioEmpresas(empresa, year));
-        return proyectarSalarios(promedios);
-    }else if(empresas[empresa] && option == 1){
-        const lowest_salarios = [];
-        const highest_salarios = [];
-        for (const year in empresas[empresa]) {
-            const salarios_ordenados = empresas[empresa][year].sort((a,b) => a - b);
-            lowest_salarios.push(salarios_ordenados[0]);
-            highest_salarios.push(salarios_ordenados[salarios_ordenados.length -1]);
-        };
-        return {
-            'Salario mas bajo': PlatziMath.calcular_mediana(lowest_salarios),
-            'Salario mas alto': PlatziMath.calcular_mediana(highest_salarios)
-        }
-    }
-}
+
 function top10Salarios(salarios){
     // const personas = salarios.map(salario => salario.name);
     const salarios_globales = salarios.map(salario => {
@@ -201,12 +237,3 @@ function top10Salarios(salarios){
     return medianaTop10;
 }
 
-/* const empresas {
-    Industrias Mokepon : {
-        2018: [salario, salario, salario],
-        2019:...
-    },
-    LexCorp : {
-        2018:[...]
-    }
-} */

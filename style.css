@@ -83,6 +83,7 @@ html{
     max-width: 640px;
     gap: 1.8rem;
     background-color: var(--secondary-background);
+    border: 1px solid var(--very-light-font);
     padding: 2rem;
     border-radius: 1rem;
 
@@ -198,9 +199,9 @@ html{
 }
 .inputs-container{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 5px;
-    width: 240px;
+    width: 100%;
 }
 .inputs-container .input{
     width: 100%;

@@ -118,12 +118,24 @@
                 <h3 class="card__title">Salario por persona</h3>
                 <div class="card__content card__content--salarios">
                     <div class="card__form">
-                        <input list="select-persona" id="input-persona" placeholder="Nombre"/>
+                        <input class="input" list="select-persona" id="input-persona" placeholder="Nombre"/>
                         <datalist id="select-persona">
                         </datalist>
+                        <button class="button button--salario-persona">Analisis de salario</button>
                     </div>
-                    <button class="button button--salario-persona">Analisis de salario</button>
                     <div class="card__resultados card__resultados--persona"></div>
+                </div>
+            </div>
+            <div class="card card--salarios">
+                <h3 class="card__title">Salario por Empresa</h3>
+                <div class="card__content card__content--salarios">
+                    <div class="card__form">
+                        <input class="input" list="select-empresa" id="input-empresa" placeholder="Nombre"/>
+                        <datalist id="select-empresa">
+                        </datalist>
+                        <button class="button button--salario-empresa">Analisis de salario</button>
+                    </div>
+                    <div class="card__resultados card__resultados--empresa"></div>
                 </div>
             </div>
         </section>
