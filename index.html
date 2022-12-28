@@ -64,54 +64,52 @@
                 <div class="card__content card__content--triangulo">
                     <div class="card__form">
                         <input class="input" type="number" id="precio" placeholder="Precio">
-                        <input class="input" type="number" id="descuento" maxlength="100" placeholder="Descuento">
+                        <input class="input" type="number" id="descuento" max="100" maxlength="100" placeholder="Descuento">
                         <button class="button" id="btn-calcular-descuento">Calcular Descuento</button>
-                        <button class="button" id="limpiar-calculo-descuento">Limpiar</button>
+                        <button class="button button--secondary" id="limpiar-calculo-descuento">Limpiar</button>
                     </div>
                     <p id="precio_con_descuento"></p>
                 </div>
             </div>
-            <div class="card cupones">
+            <div class="card card--cupones">
                 <h3 class="card__title">Aplicar descuento a un precio con cupón</h3>
-                <label for="precio2">
-                    Precio
-                    <input type="number" id="precio2">
-                </label>
-                <label for="cupon">
-                    Código del cupon
-                    <input id="cupon_descuento" type="text">
-                </label>
-                <p id="precio_con_descuento_cupon"></p>
-                <button id="btn-calcular-descuento-cupon">Aplicar descuento</button>
-                <button id="limpiar-calculo-descuento-cupon">Limpiar</button>
+                <div class="card__content card__content--cupones">
+                    <div class="card__form">
+                        <input class="input" type="number" id="precio2" placeholder="precio">                  
+                        <input class="input" id="cupon_descuento" type="text" placeholder="Código del cupon">
+                        <button class="button" id="btn-calcular-descuento-cupon">Aplicar descuento</button>
+                        <button class="button button--secondary" id="limpiar-calculo-descuento-cupon">Limpiar</button>
+                    </div>
+                    <p id="precio_con_descuento_cupon"></p>
+                </div>
             </div>
         </section>
         <section class="section section--estadistica section--inactive">
             <h2 class="section__title">Estádistica Básica</h2>
             <div class="card card--promedios">
-                <h3 class="card__title">Mediana / Promedio / Moda</h3>
-                <div class="buttons_container">
-                    <button id="btn-mediana">Mediana</button>
-                    <button id="btn-promedio">Promedio Aritmetico</button>
-                    <button id="btn-moda">Moda</button>
-                    <button id="btn-promedio-armonico">Promedio armonico</button>
-                </div>
-                <button id="mdn-add-input">+</button>
-                <button id="mdn-del-input">-</button>
-                <button id="btn-calcular">Calcular</button>
+                <h3 class="card__title">Seleccione la opción</h3>
+                <div class="card__content card__content--promedios">
+                    <div class="card__form">
+                        <div class="buttons-container">
+                            <button class="button button--promedios" id="btn-mediana">Mediana</button>
+                            <button class="button button--promedios" id="btn-promedio">Promedio Aritmetico</button>
+                            <button class="button button--promedios" id="btn-moda">Moda</button>
+                            <button class="button button--promedios" id="btn-promedio-armonico">Promedio armonico</button>
+                        </div>
+                        <div class="buttons-container buttons-container--controls">
+                            <button class="button button--promedios" id="mdn-add-input">+</button>
+                            <button class="button button--promedios" id="mdn-del-input">-</button>
+                            <button class="button bu" id="btn-calcular">Calcular</button>
+                        </div>
+                        <div class="inputs-container" id="inputs-container">
+                            <input class="input" type="number" id="mdn-nm1" placeholder="Valor 1">
+                            <input class="input" type="number" id="mdn-nm2" placeholder="Valor 2">
+                        </div>
+                    </div>
+                </div> 
                 <p id="total_valores_mdn"></p>
                 <p id="cantidad_valores_mdn"></p>
                 <p id="valor_mediana"></p>
-                <div id="inputs-container">
-                    <label for="mdn-nm1">
-                        Valor 1
-                        <input type="number" id="mdn-nm1">
-                    </label>
-                    <label for="mdn-nm2">
-                        Valor 2
-                        <input type="number" id="mdn-nm2">
-                    </label>
-                </div>
             </div>
         </section>
         <section class="section section--salarios section--inactive">

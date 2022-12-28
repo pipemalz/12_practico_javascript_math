@@ -12,11 +12,10 @@ html{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    gap: 20px;
+    gap: 50px;
     justify-content: center;
     align-items: center;
-    background-color: var(--background-color);
-    background-image: var(--background-gradient);
+    background-color: var(--primary-color);
 }
 
 /* ESTILOS HEADER */
@@ -31,7 +30,7 @@ html{
 .header__title {
     font-size: 5.2rem;
     text-align: center;
-    color: white;
+    color: var(--title-color);
 }
 
 .menu{
@@ -48,16 +47,18 @@ html{
 
 .menu__item:hover{
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--primary-font);
+    background-color: var(--secondary-background);
 }
 
 .menu__item--inactive{
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--secondary-font);
 }
 
 .menu__item--active{
-    color: rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 2px 1px rgba(255, 255, 255, 0.7);
+    color: var(--primary-font);
+    background-color: var(--secondary-background);
+    border: 1px solid var(--title-color);
 }
 
 /* ESTILOS HEADER */
@@ -81,10 +82,10 @@ html{
     align-items: center;
     max-width: 640px;
     gap: 1.8rem;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--secondary-background);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+
 }
 
 .section__title{
@@ -111,9 +112,11 @@ html{
     flex-direction: column;
     gap: 20px;
     width: 360px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
     padding: 8px;
+}
+.card:not(:last-child){
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
 }
 .card__title{
     font-size: 1.6rem;
@@ -130,27 +133,77 @@ html{
     align-items: center;
     gap: 10px;
 }
+
 .input{
     height: 30px;
     width: 240px;
     padding: 8px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid var(--very-light-font);
+    background-color: var(--primary-color);
+    color: var(--primary-font);
+}
+.input:focus-visible{
+    outline: 1px solid var(--title-color);
 }
 .button{
     height: 30px;
     width: 240px;
     border-radius: 5px;
     border: none;
-    background-color: rgba(0, 255, 0, 0.5);
+    background-color: var(--primary-button);
     font-weight: bold;
     font-size: 1.6;
-    color: white;
+    color: var(--primary-font);
 }
-
 .button:hover{
     cursor: pointer;
-    background-color: rgba(0, 255, 0, 0.7);
+    background-color: var(--primary-hover-button);
+}
+.button--secondary{
+    background-color: var(--secondary-button);
+}
+.button--secondary:hover{
+    background-color: var(--secondary-hover-button);
+}
+
+.buttons-container{
+    background-color: var(--primary-color);
+    width: 240px;
+}
+
+.buttons-container.buttons-container--controls{
+    background-color: var(--secondary-background);
+    display: flex;
+    gap: 5px;
+}
+
+.button.button--promedios{
+    background-color: var(--primary-color);
+    color: var(--secondary-font);
+}
+
+.button.button--promedios-active{
+    color: var(--primary-font);
+    border-radius: 0px;
+    background-color: var(--primary-color);
+    border: 1px solid var(--title-color);
+}
+
+.buttons-container--controls .button.button--promedios:hover{
+    color: var(--primary-font);
+    border-radius: 0px;
+    background-color: var(--primary-color);
+    border: 1px solid var(--title-color);
+}
+.inputs-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    width: 240px;
+}
+.inputs-container .input{
+    width: 100%;
 }
 
 /* ESTILOS CARDS */
@@ -160,8 +213,6 @@ html{
 
 .footer{
     width: 100%;
-    position: absolute;
-    bottom: 10px;
 }
 
 .footer__text{

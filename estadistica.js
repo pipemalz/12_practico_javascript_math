@@ -30,11 +30,11 @@ function activar_funcion(e){
     botones.forEach(boton => {
         if(e.target == boton){
             funcion_activa = e.target.id;
-            boton.style.backgroundColor = 'green';
-            boton.style.color = 'white';
+            boton.classList.add('button--promedios-active');
+            boton.classList.remove('button--promedios');
         }else{
-            boton.style.backgroundColor = 'unset';
-            boton.style.color = 'unset';
+            boton.classList.add('button--promedios');
+            boton.classList.remove('button--promedios-active');
         }
     })
 }
@@ -43,17 +43,13 @@ function add_mdn_input(){
     if(inputs_mediana.length < 20){
         const id = inputs_mediana.length+1;
 
-        const label = document.createElement('label');
-        label.setAttribute('for', `mdn-nm${id}`);
-        label.innerHTML = `Valor ${id}`;
-    
         const input = document.createElement('input');
         input.setAttribute('type', 'number');
         input.setAttribute('id', `mdn-nm${id}`);
+        input.setAttribute('placeholder', `Valor ${id}`);
+        input.classList.add('input');
     
-        label.appendChild(input);
-        inputs_container.appendChild(label);
-    
+        inputs_container.appendChild(input);
         inputs_mediana.push(input);
     }
 }
@@ -61,7 +57,7 @@ function add_mdn_input(){
 function del_mdn_input(){
     if(inputs_mediana.length > 2){
         const id = inputs_mediana.length;
-        document.querySelector(`[for=mdn-nm${id}]`).remove();
+        document.querySelector(`[id=mdn-nm${id}]`).remove();
         inputs_mediana.pop();
     }
 }
@@ -98,13 +94,13 @@ function verificarValores(){
     let validado = true;
     inputs_mediana.forEach(input => {
         if(input.value == ''){
-            input.style.backgroundColor = 'red';
+            input.style.backgroundColor = 'var(--title-color)';
             validado = false;
         }else{
-            input.style.backgroundColor = 'transparent'
+            input.style.backgroundColor = 'var(--primary-color)'
         }
         input.addEventListener('click', function () {
-            input.style.backgroundColor = 'unset';
+            input.style.backgroundColor = 'var(--primary-color)';
         });
     });
     return validado;
