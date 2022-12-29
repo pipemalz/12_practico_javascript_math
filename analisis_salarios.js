@@ -60,8 +60,7 @@ class Persona{
         if(this.getSalarios()){
             salario_persona_div.style.display = 'flex';
             salario_persona_div.innerHTML = `<p><strong> Análisis salarial de ${this.nombre} </strong></p>
-            <p><strong>Proyeccion salario: </strong>${Math.ceil(this.proyeccion_salario)}</p>
-            ${this.printTrabajos()}`;
+            <p><strong>Proyeccion salario: </strong>${Math.ceil(this.proyeccion_salario)}</p>`;
     
             let texto = '';
             this.trabajos.forEach(trabajo => {
