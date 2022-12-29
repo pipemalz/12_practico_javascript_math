@@ -91,17 +91,18 @@ class Triangulo{
     print(){
         let area;
         if(!this.area()){
-            area = `No es un triangulo`;
+            triangulo_div.innerHTML = `No es un triangulo`;
         }else{
             area = this.area();
+            triangulo_div.innerHTML = `<p><strong>Triángulo</strong></p>
+            <p><strong>Base</strong> = ${this.base}</p>
+            <p><strong>Lado 1</strong> = ${this.l1}</p>
+            <p><strong>Lado 2</strong> = ${this.l2}</p>
+            <p><strong>Perimetro</strong> = ${this.perimetro()}</p>
+            <p><strong>Area</strong> = ${area}</p>`
         }
         triangulo_div.style.display = 'flex';
-        triangulo_div.innerHTML = `<p><strong>Triángulo</strong></p>
-        <p><strong>Base</strong> = ${this.base}</p>
-        <p><strong>Lado 1</strong> = ${this.l1}</p>
-        <p><strong>Lado 2</strong> = ${this.l2}</p>
-        <p><strong>Perimetro</strong> = ${this.perimetro()}</p>
-        <p><strong>Area</strong> = ${area}</p>`
+
     }
 }
 
