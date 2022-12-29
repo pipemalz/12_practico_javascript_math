@@ -15,6 +15,8 @@ const p_total_valores = document.getElementById('total_valores_mdn');
 const p_cantidad_valores = document.getElementById('cantidad_valores_mdn');
 const p_valor_mediana = document.getElementById('valor_mediana');
 
+const div_resultado_promedios = document.querySelector('.card__resultados--promedios');
+
 let funcion_activa = false;
 
 btn_mdn_add_input.addEventListener('click', add_mdn_input);
@@ -66,6 +68,7 @@ function calcular(){
     const valores = inputs_mediana.map(input => parseInt(input.value));
     const total_valores = valores.reduce((acc,sum) => acc + sum);
     let resultado = '';
+    div_resultado_promedios.style.display = 'flex';
     p_cantidad_valores.innerText = '';
     p_valor_mediana.innerText = '';
     if(funcion_activa && verificarValores()){

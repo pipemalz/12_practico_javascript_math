@@ -28,8 +28,13 @@ class Persona{
     };
     getSalarios(){
         const persona = salarios.find(salario => salario.name == this.nombre);
-        const salarios_persona = persona.trabajos.map(trabajo => trabajo.salario);
-        return salarios_persona;
+        if(persona){
+            const salarios_persona = persona.trabajos.map(trabajo => trabajo.salario);
+            return salarios_persona;
+        }else{
+            salario_persona_div.style.display = 'flex';
+            salario_persona_div.innerHTML = `<p><strong> No existe esta persona en la base de datos </strong></p>`;
+        }
     };
     getTrabajos(){
         const persona = salarios.find(salario => salario.name == this.nombre);
@@ -51,17 +56,20 @@ class Persona{
         const nuevo_salario = ultimo_salario + aumento;
         return nuevo_salario;
     };
-    printTrabajos(){
-        let texto = '';
-        this.trabajos.forEach(trabajo => {
-            texto += `<p><strong>Año: </strong>${trabajo.year}, <strong>Empresa: </strong>${trabajo.empresa}, <strong>Salario: </strong> ${trabajo.salario}</p>`
-        });
-        return texto;
-    }
     print(){
-        salario_persona_div.innerHTML = `<h4> Análisis salarial de ${this.nombre} </h4>
-        <p><strong>Proyeccion salario: </strong>${this.proyeccion_salario}</p>
-        ${this.printTrabajos()}`;
+        if(this.getSalarios()){
+            salario_persona_div.style.display = 'flex';
+            salario_persona_div.innerHTML = `<p><strong> Análisis salarial de ${this.nombre} </strong></p>
+            <p><strong>Proyeccion salario: </strong>${Math.ceil(this.proyeccion_salario)}</p>
+            ${this.printTrabajos()}`;
+    
+            let texto = '';
+            this.trabajos.forEach(trabajo => {
+                texto += `<p><strong>Año: </strong>${trabajo.year}, <strong>Empresa: </strong>${trabajo.empresa}, <strong>Salario: </strong> ${trabajo.salario}</p>`
+            });
+    
+            salario_persona_div.innerHTML += texto;
+        }
     }
 };
 
@@ -70,7 +78,6 @@ function imprimirSalarios(e){
         const persona = new Persona(input_persona.value);
         persona.print();
     }else if(e.target.classList.contains('button--salario-empresa') && input_empresa.value != ''){
-        console.log('aca')
         const empresa = new Empresa(input_empresa.value);
         empresa.print();
     }
@@ -175,21 +182,24 @@ class Empresa{
         }
     };
     print(){
-        salario_empresa_div.innerHTML = `<p><strong>Empresa: </strong> ${this.name}</p>
-        <h4>Promedio salarios pagados por año</h4>`
-
-        Object.keys(empresas[this.name]).forEach(year => {
-            salario_empresa_div.innerHTML += `<p><strong>${year}: </strong>${this.medianaSalarios(year)}</p>`;
-        })
-
-        salario_empresa_div.innerHTML += `<p><strong>Proyeccion salarial: </strong>${this.proyeccionSalario()}</p>`
+        salario_empresa_div.style.display = 'flex';
+        if(empresas[this.name]){
+            salario_empresa_div.innerHTML = `<p><strong>Empresa: </strong> ${this.name}</p>
+            <p>Promedio salarios pagados por año</p>`
+            const years = [];
+            
+            Object.keys(empresas[this.name]).forEach(year => {
+                salario_empresa_div.innerHTML += `<p><strong>${year}: </strong>${this.medianaSalarios(year)}</p>`;
+                years.push(year);
+            })
+            const ultimo_anio = Math.max(...years);
+            salario_empresa_div.innerHTML += `<p><strong>Proyeccion salarial ${ultimo_anio+1}: </strong>${Math.ceil(this.proyeccionSalario())}</p>`
+        }else{
+            salario_empresa_div.innerHTML = `<p><strong>No existe esta empresa en la base de datos.</strong></p>`
+        }
     }
 
 }
-
-const freelance = new Empresa('Freelance');
-console.log(freelance.medianaSalarios(2020))
-console.log(freelance.proyeccionSalario(1))
 
 // function proyeccionSalarioEmpresas(empresa, option=0){
 //     if(!empresas[empresa]){

@@ -61,14 +61,16 @@
             <h2 class="section__title">Porcentajes</h2>
             <div class="card card--porcentajes">
                 <h3 class="card__title">Aplicar descuento a un precio</h3>
-                <div class="card__content card__content--triangulo">
+                <div class="card__content card__content--descuento">
                     <div class="card__form">
                         <input class="input" type="number" id="precio" placeholder="Precio">
                         <input class="input" type="number" id="descuento" max="100" maxlength="100" placeholder="Descuento">
                         <button class="button" id="btn-calcular-descuento">Calcular Descuento</button>
                         <button class="button button--secondary" id="limpiar-calculo-descuento">Limpiar</button>
                     </div>
-                    <p id="precio_con_descuento"></p>
+                    <div class="card__resultados card__resultados--descuento">
+                        <p id="precio_con_descuento"></p>
+                    </div>
                 </div>
             </div>
             <div class="card card--cupones">
@@ -80,7 +82,9 @@
                         <button class="button" id="btn-calcular-descuento-cupon">Aplicar descuento</button>
                         <button class="button button--secondary" id="limpiar-calculo-descuento-cupon">Limpiar</button>
                     </div>
-                    <p id="precio_con_descuento_cupon"></p>
+                    <div class="card__resultados card__resultados--cupones">
+                        <p id="precio_con_descuento_cupon"></p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -107,9 +111,11 @@
                         </div>
                     </div>
                 </div> 
-                <p id="total_valores_mdn"></p>
-                <p id="cantidad_valores_mdn"></p>
-                <p id="valor_mediana"></p>
+                <div class="card__resultados card__resultados--promedios">
+                    <p id="total_valores_mdn"></p>
+                    <p id="cantidad_valores_mdn"></p>
+                    <p id="valor_mediana"></p>
+                </div>
             </div>
         </section>
         <section class="section section--salarios section--inactive">

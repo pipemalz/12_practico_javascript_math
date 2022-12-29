@@ -8,6 +8,8 @@ const boton_limpiar_cupon = document.getElementById('limpiar-calculo-descuento-c
 const input_precio2 = document.getElementById('precio2');
 const input_cupon_descuento = document.getElementById('cupon_descuento');
 const p_resultado_cupon = document.getElementById('precio_con_descuento_cupon');
+const div_resultado_descuento = document.querySelector('.card__resultados--descuento');
+const div_resultado_cupones = document.querySelector('.card__resultados--cupones');
 
 boton_calcular_descuento.addEventListener('click', mostrarPrecioDescuento);
 boton_limpiar.addEventListener('click', limpiarDescuento);
@@ -21,6 +23,7 @@ function calcularDescuento(precio, descuento){
 function mostrarPrecioDescuento(){
     const precio = input_precio.value;
     const descuento = input_descuento.value;
+    div_resultado_descuento.style.display = 'flex';
     if(parseInt(descuento) > 100){
         p_resultado.innerText = 'Descuento debe estar entre 1 y 100';
     }else if(precio != '' && descuento != ''){
@@ -32,6 +35,7 @@ function limpiarDescuento(){
     input_precio.value = '';
     input_descuento.value = '';
     p_resultado.innerText = '';
+    div_resultado_descuento.style.display = 'none';
 };
 
 function mostrarPrecioDescuentoCupon(){
@@ -95,6 +99,7 @@ function mostrarPrecioDescuentoCupon(){
 
         // METODO FIND
         let cuponDescuento = cupones.find(cupon => cupon.code == cuponInput);
+        div_resultado_cupones.style.display = 'flex';
         if(cuponDescuento != undefined){
             p_resultado_cupon.innerText = `Descuento del ${cuponDescuento.discount}% aplicado! precio final: ${calcularDescuento(precio, cuponDescuento.discount)}`;
         }else{
@@ -110,4 +115,5 @@ function limpiarDescuentoCupon(){
     input_precio2.value = '';
     input_cupon_descuento.value = '';
     p_resultado_cupon.innerText = '';
+    div_resultado_cupones.style.display = 'none';
 }

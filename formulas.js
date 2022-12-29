@@ -41,6 +41,7 @@ class Rectangulo{
         return this.base * this.altura;
     }
     print(){
+        rectangulo_div.style.display = 'flex';
         rectangulo_div.innerHTML = `<h3> Cuadrado </h3>
         <p> <strong> Base </strong> = ${this.base}px </p>
         <p> <strong> Altura </strong> = ${this.altura}px </p>
@@ -94,12 +95,13 @@ class Triangulo{
         }else{
             area = this.area();
         }
-        triangulo_div.innerText = `Triángulo
-        Base = ${this.base}
-        Lado 1 = ${this.l1}
-        Lado 2 = ${this.l2}
-        Perimetro = ${this.perimetro()}
-        Area = ${area}`
+        triangulo_div.style.display = 'flex';
+        triangulo_div.innerHTML = `<p><strong>Triángulo</strong></p>
+        <p><strong>Base</strong> = ${this.base}</p>
+        <p><strong>Lado 1</strong> = ${this.l1}</p>
+        <p><strong>Lado 2</strong> = ${this.l2}</p>
+        <p><strong>Perimetro</strong> = ${this.perimetro()}</p>
+        <p><strong>Area</strong> = ${area}</p>`
     }
 }
 
@@ -142,11 +144,12 @@ class Circulo{
         this.area = Math.PI * this.radio**2;
     }
     print(){
-        circulo_div.innerText = `Circulo 
-        Radio = ${this.radio}px
-        Diametro = ${this.diametro}px
-        Perimetro = ${this.perimetro}px
-        Area = ${this.area}px`
+        circulo_div.style.display = 'flex';
+        circulo_div.innerHTML = `<p><strong>Circulo</strong></p> 
+        <p><strong>Radio</strong> = ${this.radio}px</p> 
+        <p><strong>Diametro</strong> = ${this.diametro}px</p> 
+        <p><strong>Perimetro</strong> = ${this.perimetro}px</p> 
+        <p><strong>Area</strong> = ${this.area}px</p> `
     }
 }
 
